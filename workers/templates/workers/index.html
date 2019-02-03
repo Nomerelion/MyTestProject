@@ -1,0 +1,29 @@
+{% extends 'workers/base.html' %}
+{% load static %}
+
+
+
+        {% block content %}
+            <div class="row" id="tree"></div>
+        {% endblock %}
+    
+    {% block script %}
+        <script>
+            $(function () {
+                var fillTree = function() {
+                    var url = 'tree/',
+                        data = {};
+                    var dataFromServer = {};
+    
+                    $.get(url, data, function(treeData) {
+                        $('#tree').jstree(treeData);
+                    });
+                };
+    
+                fillTree();
+            });
+        </script>
+    {% endblock %}
+
+
+</html>
