@@ -10,6 +10,12 @@
         <link rel="stylesheet" href="{% static 'workers/bootstrap/css/bootstrap.css' %}" >
         <script src="{% static 'workers/jquery.js' %}"></script>
         <script src="{% static 'workers/jstree/dist/jstree.min.js' %}"></script>
+        <!-- tables -->
+        {% block includes %}
+        {% endblock %}
+
+
+
         <style>
             body {
                 padding-top: 60px; /* 60px to make the container go all the way to the bottom of the topbar */
@@ -25,12 +31,11 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </a>
-                <a class="brand" href="#">Project name</a>
+                <a class="brand" href="#">Workers</a>
                 <div class="nav-collapse">
                     <ul class="nav">
-                    <li class="active"><a href="#">Home</a></li>
-                    <li><a href="#about">About</a></li>
-                    <li><a href="#contact">Contact</a></li>
+                    <li><a href="/workers/">Tree</a></li>
+                    <li><a href="/workers/table/">Table</a></li>
                     </ul>
                 </div>
                 </div>

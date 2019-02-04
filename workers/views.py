@@ -10,7 +10,6 @@ def index(request):
     return render(request, "workers/index.html", ctx)
 
 def show_tree(request):
-    print('hello')
     tree_nodes_list = list()
     for item in Employee.objects.all():
         tree_nodes_list.append({
@@ -19,10 +18,30 @@ def show_tree(request):
             'text': 'Full name: %s, Position: %s' % (item.full_name, item.position)
         })
 
-    print(tree_nodes_list)
     ctx = {
         'core': {
             'data' : tree_nodes_list 
         }
     }
+    return JsonResponse(ctx)
+
+def table(request):
+    ctx = {
+        'table_name' : 'Workers' 
+    }
+    return render(request, "workers/table.html" , ctx)
+
+def show_data(request):
+    table_list = list()
+    for item in Employee.objects.all():
+        table_list.append({
+            'Name': item.full_name,
+            'Position': item.position,
+            'Salary': item.salary,
+            'Employment date': item.employment_date,
+            'extn': item.id
+        })
+
+    ctx = { 'data' : table_list } 
+
     return JsonResponse(ctx)
