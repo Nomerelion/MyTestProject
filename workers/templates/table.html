@@ -8,9 +8,15 @@
 {% endblock %}
 
 {% block content %}
-    <div>
-        <table id="workers-table" ></table>
-    </div>
+    {% if user.is_authenticated %}
+        <div>
+            <table id="workers-table" ></table>
+        </div>
+    {% else %}
+        <div>
+                <p>You need to <a href="{% url 'login' %}">Login</a></p>
+        </div>
+    {% endif %}
 {% endblock %}
 
 {% block script %}

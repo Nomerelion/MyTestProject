@@ -2,24 +2,30 @@
 
 
 
-    {% block content %}
+{% block content %}
+    {% if user.is_authenticated %}
         <div class="row" id="tree"></div>
-    {% endblock %}
-    
-    {% block script %}
-        <script>
-            $(function () {
-                var fillTree = function() {
-                    var url = 'show_tree/',
-                        data = {};
-                    var dataFromServer = {};
-    
-                    $.get(url, data, function(treeData) {
-                        $('#tree').jstree(treeData);
-                    });
-                };
-    
-                fillTree();
-            });
-        </script>
-    {% endblock %}
+    {% else %}
+        <div>
+            <p>You need to <a href="{% url 'login' %}">Login</a></p>
+        </div>
+    {% endif %}
+{% endblock %}
+
+{% block script %}
+    <script>
+        $(function () {
+            var fillTree = function() {
+                var url = 'show_tree/',
+                    data = {};
+                var dataFromServer = {};
+
+                $.get(url, data, function(treeData) {
+                    $('#tree').jstree(treeData);
+                });
+            };
+
+            fillTree();
+        });
+    </script>
+{% endblock %}
