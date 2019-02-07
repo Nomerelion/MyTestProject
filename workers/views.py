@@ -1,15 +1,20 @@
 from django.shortcuts import render
-from django.http import HttpResponse, JsonResponse
-import json
+from django.http import HttpResponse, JsonResponse, HttpResponseRedirect
 from workers.models import Employee
+from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth.forms import UserCreationForm
+from django.urls import reverse_lazy
+from django.views import generic
 
-def index(request):
+import json
+
+def tree(request):
     ctx = {
-        'name': 'Edgar'
     }
-    return render(request, "workers/index.html", ctx)
+    return render(request, 'tree.html', ctx)
 
 def show_tree(request):
+    print('hello')
     tree_nodes_list = list()
     for item in Employee.objects.all():
         tree_nodes_list.append({
@@ -27,9 +32,29 @@ def show_tree(request):
 
 def table(request):
     ctx = {
-        'table_name' : 'Workers' 
+        'table_name' : 'Workers',
+        'table_opts': dict({},
+            columns=json.dumps([
+                {
+                    'data': u'Name',
+                    'title': u'Name'
+                },
+                {   
+                    'data': u'Position',
+                    'title': u'Position' 
+                },
+                {
+                    'data': u'Salary',
+                    'title': u'Salary'
+                },
+                { 
+                    'data': u'Employment date',
+                    'title': u'Employment date'
+                }
+            ])
+        )    
     }
-    return render(request, "workers/table.html" , ctx)
+    return render(request, 'table.html' , ctx)
 
 def show_data(request):
     table_list = list()
@@ -42,6 +67,12 @@ def show_data(request):
             'extn': item.id
         })
 
-    ctx = { 'data' : table_list } 
-
+    ctx = {
+        'data' : table_list,  
+    } 
     return JsonResponse(ctx)
+
+class SignUp(generic.CreateView):
+    form_class = UserCreationForm
+    success_url = reverse_lazy('login')
+    template_name = 'signup.html'

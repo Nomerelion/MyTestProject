@@ -4,7 +4,8 @@
 <html>
     <head>
         <meta charset="utf-8">
-        <title> </title>
+        {% block title %}
+        {% endblock %}
         
         <link rel="stylesheet" href="{% static 'workers/jstree/dist/themes/default/style.min.css' %}" >
         <link rel="stylesheet" href="{% static 'workers/bootstrap/css/bootstrap.css' %}" >
@@ -14,7 +15,7 @@
         {% block includes %}
         {% endblock %}
 
-
+        
 
         <style>
             body {
@@ -26,17 +27,18 @@
         <div class="navbar navbar-fixed-top">
             <div class="navbar-inner">
                 <div class="container">
-                <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </a>
-                <a class="brand" href="#">Workers</a>
-                <div class="nav-collapse">
-                    <ul class="nav">
-                    <li><a href="/workers/">Tree</a></li>
-                    <li><a href="/workers/table/">Table</a></li>
+                        <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+                                <span class="icon-bar"></span>
+                                <span class="icon-bar"></span>
+                                <span class="icon-bar"></span>
+                            </a>
+                            <a class="brand" href="#">Workers</a>
+                            <div class="nav-collapse">
+                                <ul class="nav">
+                                <li><a href="/workers/">Tree</a></li>
+                                <li><a href="/workers/table/">Table</a></li>     
                     </ul>
+                    <p class="navbar-text pull-right"><a href="{% url 'workers:signup' %}">Sign up</a><a href="{% url 'login' %}"> Log in</a></p>
                 </div>
                 </div>
             </div>
